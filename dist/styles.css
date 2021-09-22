@@ -6,6 +6,18 @@ body {
   margin: 2;
 }
 
+.viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+}
+
 .weather-container {
   display: flex;
   flex-direction: column;
