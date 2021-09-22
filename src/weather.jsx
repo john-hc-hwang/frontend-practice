@@ -70,11 +70,11 @@ class Weather extends React.Component {
   mapWeather(weatherArray) {
     const weathers = weatherArray.map(weather =>
       <div key={ weather.weatherId } className="weather-container">
-        <p>{ this.showDate(weather.date) }</p>
+        <p className="date-font">{ this.showDate(weather.date) }</p>
         <p>{ weather.description }</p>
         <div className="temperature">
-          <p>{ weather.temp_max }&deg;</p>
-          <p>{ weather.temp_min }&deg;</p>
+          <p className="temp-max-font">{ weather.temp_max }&deg;</p>
+          <p className="temp-min-font">{ weather.temp_min }&deg;</p>
         </div>
       </div>
     );
