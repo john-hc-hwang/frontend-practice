@@ -1,6 +1,5 @@
 import React from 'react';
-require('dotenv/config');
-
+// use env.API_Key to secure API Key from being leaked
 class Weather extends React.Component {
   constructor(props) {
     super(props);
@@ -9,8 +8,9 @@ class Weather extends React.Component {
       weather: []
     }
     // bind methods here
-    this.mapWeather = this.mapWeather.bind(this);
     this.showDate = this.showDate.bind(this);
+    this.showIcon = this.showIcon.bind(this);
+    this.mapWeather = this.mapWeather.bind(this);
   }
 
   componentDidMount() {
@@ -19,7 +19,7 @@ class Weather extends React.Component {
     const tempArray = [];
     let tempObject = {};
 
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=90630,us&appid=${process.env.REACT_APP_API_KEY}`)
+    fetch("https://api.openweathermap.org/data/2.5/forecast?zip=90630,us&appid=c670fca5060676c3ab06005ac9d1b950")
       .then(result => result.json())
       .then(data => {
         for (const elem of data.list) {
@@ -68,11 +68,34 @@ class Weather extends React.Component {
     }
   }
 
+  showIcon(description) {
+    if (description === "clear sky") {
+      return "01d";
+    } else if (description === "few clouds") {
+        return "02d";
+    } else if (description === "scattered clouds") {
+        return "03d";
+    } else if (description === "broken clouds") {
+        return "04d";
+    } else if (description === "shower rain") {
+        return "09d";
+    } else if (description === "rain") {
+        return "10d";
+    } else if (description === "thunderstorm") {
+        return "11d";
+    } else if (description === "snow") {
+        return "13d";
+    } else {
+        // last choice left is mist
+        return "50d";
+    }
+  }
+
   mapWeather(weatherArray) {
     const weathers = weatherArray.map(weather =>
       <div key={ weather.weatherId } className="weather-container">
         <p className="date-font">{ this.showDate(weather.date) }</p>
-        <p>{ weather.description }</p>
+        <img src={ `http://openweathermap.org/img/wn/${ this.showIcon(weather.description) }@2x.png` } alt={ weather.description } />
         <div className="temperature">
           <p className="temp-max-font">{ weather.temp_max }&deg;</p>
           <p className="temp-min-font">{ weather.temp_min }&deg;</p>
