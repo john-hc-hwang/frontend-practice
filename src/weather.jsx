@@ -1,4 +1,5 @@
 import React from 'react';
+require('dotenv/config');
 
 class Weather extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Weather extends React.Component {
     const tempArray = [];
     let tempObject = {};
 
-    fetch("https://api.openweathermap.org/data/2.5/forecast?zip=90630,us&appid=c670fca5060676c3ab06005ac9d1b950")
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=90630,us&appid=${process.env.REACT_APP_API_KEY}`)
       .then(result => result.json())
       .then(data => {
         for (const elem of data.list) {
