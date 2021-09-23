@@ -1,3 +1,3 @@
 # frontend-practice
 
-This repo will contain frontend web dev practices
+This repo contains frontend web dev practices
