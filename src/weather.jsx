@@ -4,6 +4,7 @@ class Weather extends React.Component {
   constructor(props) {
     super(props);
 
+    // use state to store cleaned up data into an array of objects
     this.state = {
       weather: []
     }
@@ -14,7 +15,7 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    let current = null;
+    let currentDate = null;
     let id = 1;
     const tempArray = [];
     let tempObject = {};
@@ -24,10 +25,10 @@ class Weather extends React.Component {
       .then(data => {
         for (const elem of data.list) {
           // cleaning data returned from API with conditional statement
-          if (current !== elem.dt_txt.slice(0,10)) {
-            current = elem.dt_txt.slice(0,10);
+          if (currentDate !== elem.dt_txt.slice(0,10)) {
+            currentDate = elem.dt_txt.slice(0,10);
 
-            tempObject.date = current;
+            tempObject.date = currentDate;
             tempObject.temp_max = parseInt((elem.main.temp_max - 273.15)*(9/5) + 32);
             tempObject.temp_min = parseInt((elem.main.temp_min - 273.15)*(9/5) + 32);
             tempObject.description = elem.weather[0].description;
