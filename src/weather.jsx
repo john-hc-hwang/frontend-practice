@@ -49,6 +49,7 @@ class Weather extends React.Component {
       });
   }
 
+  // this method gets the date and turns it into a day in the week
   showDate(date) {
     const newDate = new Date(date);
     const dayNumber = newDate.getDay();
