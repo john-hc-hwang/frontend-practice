@@ -44,6 +44,7 @@ class Weather extends React.Component {
         // API returns data for 6 days and we only need 5, therefore pop()
         tempArray.pop();
 
+        // after tempArray has been populated set it to the state weather
         this.setState({ weather: tempArray });
       });
   }
